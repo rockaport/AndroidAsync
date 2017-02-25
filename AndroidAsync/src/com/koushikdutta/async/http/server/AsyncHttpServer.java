@@ -33,6 +33,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -236,6 +237,14 @@ public class AsyncHttpServer {
     
     public AsyncServerSocket listen(int port) {
         return listen(AsyncServer.getDefault(), port);
+    }
+
+    public AsyncServerSocket listen(InetAddress inetAddress, int port) {
+        return listen(AsyncServer.getDefault(), inetAddress, port);
+    }
+
+    private AsyncServerSocket listen(AsyncServer server, InetAddress inetAddress, int port) {
+        return server.listen(inetAddress, port, mListenCallback);
     }
 
     public void listenSecure(final int port, final SSLContext sslContext) {
